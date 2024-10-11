@@ -22,19 +22,14 @@ const userSchema = mongoose.Schema(
         type: String,
         required: true,
         unique: true,
-        match: [/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/, '{VALUE} is not a valid email!'],
+        match: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
       },
     password: { type: String, required: true, minlength: 6 },
     phone: {
-      type: Number,
-      required: true,
-      validate: {
-        validator: function (v) {
-          return /^\d{10}$/.test(v); // 10-digit phone number validation
-        },
-        message: (props) => `${props.value} is not a valid phone number!`,
+        type: String,  // Change type to String for regex to work correctly
+        required: true,
+        match: /^\d{10}$/,  // Using match for 10-digit validation
       },
-    },
     addresses: { type: [addressSchema], required: true },
   },
   { timestamps: true }
@@ -68,6 +63,6 @@ const validateUser = (user) => {
 };
 
 module.exports = {
-  userModel: mongoose.model("User", userSchema),
+  userModel: mongoose.model("user", userSchema),
   validateUser,
 };
