@@ -10,7 +10,7 @@ const addressSchema = mongoose.Schema({
     type: Number,
     required: true,
     min: 10000,
-    max: 99999
+    max: 99999,
   },
 });
 
@@ -19,17 +19,17 @@ const userSchema = mongoose.Schema(
   {
     name: { type: String, required: true },
     email: {
-        type: String,
-        required: true,
-        unique: true,
-        match: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
-      },
-    password: { type: String, required: true, minlength: 6 },
+      type: String,
+      required: true,
+      unique: true,
+      match: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
+    },
+    password: { type: String },
     phone: {
-        type: String,  // Change type to String for regex to work correctly
-        required: true,
-        match: /^\d{10}$/,  // Using match for 10-digit validation
-      },
+      type: String, // Change type to String for regex to work correctly
+      required: true,
+      match: /^\d{10}$/, // Using match for 10-digit validation
+    },
     addresses: { type: [addressSchema], required: true },
   },
   { timestamps: true }

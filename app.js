@@ -2,6 +2,8 @@ const express = require('express');
 const app = express();
 const path = require('path');
 
+require('dotenv').config()
+const db = require("./config/mongoose")
 
 app.set('view engine', 'ejs');
 app.use(express.json());
